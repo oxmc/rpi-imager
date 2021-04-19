@@ -2,9 +2,9 @@
 
 Raspberry Pi Imaging Utility
 
-- Download the latest version for Windows, macOS and Ubuntu from the [Raspberry Pi downloads page](https://www.raspberrypi.org/downloads/).
+<!--- Download the latest version for Windows, macOS and Ubuntu from the [Raspberry Pi downloads page](https://www.raspberrypi.org/downloads/).
 - To install on Raspberry Pi OS, use `sudo apt update && sudo apt install rpi-imager`.
-
+-->
 ## License
 
 The main code of the Imaging Utility is made available under the terms of the Apache license.
@@ -48,7 +48,7 @@ sudo apt install ./rpi-imager*.deb
 It should create an icon in the start menu under "Utilities" or "Accessories".
 The imaging utility will normally be run as regular user, and will call udisks2 over DBus to perform privileged operations like opening the disk device for writing.
 If udisks2 is not functional on your Linux distribution, you can alternatively start it as "root" with sudo and similar tools.
-
+<!--
 ### Fedora/RHEL/CentOS Linux
 
 #### Get dependencies
@@ -73,7 +73,7 @@ cmake .
 make
 sudo make install
 ```
-
+-->
 ### Windows
 
 #### Get dependencies
@@ -142,7 +142,16 @@ On Windows start the application with the command-line option --debug to let it 
 If the application is started with "--repo [your own URL]" it will use a custom image repository.
 So can simply create another 'start menu shortcut' to the application with that parameter to use the application with your own images.
 
-### Telemetry
+Or you can change config.h
+```c++
+/* Repository URL */
+#define OSLIST_URL                        "https://downloads.raspberrypi.org/os_list_imagingutility_v2.json"
+
+/* Time synchronization URL (only used on eglfs QPA platform, URL must be HTTP) */
+#define TIME_URL                          "http://downloads.raspberrypi.org/os_list_imagingutility_v2.json?time_synchronization"
+```
+
+<!--### Telemetry
 
 In order to understand which images and operating systems are most popular and re-organise the application accordingly, when using the default image repository, the URL, operating system name and category (if present) of a selected image are sent to https://rpi-imager-stats.raspberrypi.org by [`downloadstatstelemetry.cpp`](https://github.com/raspberrypi/rpi-imager/blob/qml/downloadstatstelemetry.cpp).
 
@@ -168,3 +177,4 @@ On macOS, disable it by editing the property list for the application:
 ```
 defaults write org.raspberrypi.Imager.plist telemetry -bool NO
 ```
+-->
