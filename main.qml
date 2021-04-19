@@ -20,7 +20,7 @@ ApplicationWindow {
     minimumHeight: imageWriter.isEmbeddedMode() ? -1 : 420
     //maximumHeight: imageWriter.isEmbeddedMode() ? -1 : 420
 
-    title: qsTr("Raspberry Pi Imager v%1").arg(imageWriter.constantVersion())
+    title: qsTr("oxmc's Raspberry Pi Imager v%1").arg(imageWriter.constantVersion())
 
     FontLoader {id: roboto;      source: "fonts/Roboto-Regular.ttf"}
     FontLoader {id: robotoLight; source: "fonts/Roboto-Light.ttf"}
@@ -44,7 +44,7 @@ ApplicationWindow {
     }
 
     Shortcut {
-        sequences: ["Shift+Ctrl+X", "Shift+Meta+X"]
+        sequences: ["Shift+Ctrl+O", "Shift+Meta+O"]
         context: Qt.ApplicationShortcut
         onActivated: {
             optionspopup.openPopup()
@@ -422,6 +422,13 @@ ApplicationWindow {
             name: qsTr("Use custom")
             description: qsTr("Select a custom .img from your computer")
         }
+        
+        ListElement {
+            url: ""
+            icon: "icons/use_custom.png"
+            name: qsTr("Use custom URL")
+            description: qsTr("Select a custom .img from a URL")
+        }
 
         Component.onCompleted: {
             if (imageWriter.isOnline()) {
@@ -743,7 +750,7 @@ ApplicationWindow {
         yesButton: true
         noButton: true
         title: qsTr("Are you sure you want to quit?")
-        text: qsTr("Raspberry Pi Imager is still busy.<br>Are you sure you want to quit?")
+        text: qsTr("The Imager is still busy.<br>Are you sure you want to quit?")
         onYes: {
             Qt.quit()
         }
