@@ -27,7 +27,7 @@ sudo apt install --no-install-recommends build-essential devscripts debhelper cm
 #### Get the source
 
 ```
-git clone --depth 1 https://github.com/raspberrypi/rpi-imager
+git clone --depth 1 https://github.com/oxmc/rpi-imager
 ```
 
 #### Build the Debian package
