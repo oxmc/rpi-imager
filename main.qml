@@ -434,8 +434,9 @@ ApplicationWindow {
             icon: "icons/use_custom.png"
             name: qsTr("Use custom .img from URL")
             description: qsTr("Download and use a custom .img from a URL")
-            
-            MouseArea {
+        }
+        
+        MouseArea {
                     anchors.fill: parent
                     onClicked: list.currentIndex = index
                 }
@@ -449,7 +450,6 @@ ApplicationWindow {
                     console.log(model.get(list.currentIndex).name + ' selected')
                     optionspopup.openPopup()
             }
-        }
     }
 
     Component {
