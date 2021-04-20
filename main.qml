@@ -435,7 +435,6 @@ ApplicationWindow {
             icon: "icons/use_custom.png"
             name: qsTr("Use custom URL")
             description: qsTr("Select a custom .img from a URL")
-            dialog.visible = true
             geturlpopup.openPopup()
         }
         
