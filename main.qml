@@ -474,25 +474,11 @@ ApplicationWindow {
 
     ListModel {
         id: osmodel
-        
-        ListElement {
-            url: ""
-            icon: "icons/use_custom.png"
-            name: qsTr("Use custom .img")
-            description: qsTr("Select a custom .img from your computer")
-        }
-        
-        ListElement {
-            url: ""
-            icon: "icons/use_custom.png"
-            name: qsTr("Use custom .img from URL")
-            description: qsTr("Select a custom .img from a URL")
-            
-            MouseArea {
-                    anchors.fill: parent
-                    onClicked: list.currentIndex = index
-                }
-            onCurrentItemChanged: console.log(model.get(list.currentIndex).name + ' selected')
+
+        Component.onCompleted: {
+            if (imageWriter.isOnline()) {
+                fetchOSlist();
+            }
         }
         
         ListElement {
@@ -509,11 +495,25 @@ ApplicationWindow {
             description: qsTr("Format card as FAT32")
             tooltip: ""
         }
-
-        Component.onCompleted: {
-            if (imageWriter.isOnline()) {
-                fetchOSlist();
-            }
+        
+        ListElement {
+            url: ""
+            icon: "icons/use_custom.png"
+            name: qsTr("Use custom .img")
+            description: qsTr("Select a custom .img from your computer")
+        }
+        
+        ListElement {
+            url: ""
+            icon: "icons/use_custom.png"
+            name: qsTr("Use custom .img from URL")
+            description: qsTr("Download and use a custom .img from a URL")
+            
+            MouseArea {
+                    anchors.fill: parent
+                    onClicked: list.currentIndex = index
+                }
+            onCurrentItemChanged: console.log(model.get(list.currentIndex).name + ' selected')
         }
     }
 
