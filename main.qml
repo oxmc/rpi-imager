@@ -404,10 +404,7 @@ ApplicationWindow {
         Component.onCompleted: {
             if (imageWriter.isOnline()) {
                 fetchOSlist();
-            }
-        }
-        
-        ListElement {
+                ListElement {
             url: "internal://format"
             icon: "icons/erase.png"
             extract_size: 0
@@ -429,11 +426,28 @@ ApplicationWindow {
             description: qsTr("Select a custom .img from your computer")
         }
         
-        ListElement {
+        /*ListElement {
             url: ""
             icon: "icons/use_custom.png"
             name: qsTr("Use custom .img from URL")
             description: qsTr("Download and use a custom .img from a URL")
+            internalIndex: 1
+        }*/
+        
+        Button {
+              anchors.fill: parent
+              text: ""
+              iconSource: "qrc:/youricon.png"
+              onClicked: {
+                            geturlpopup.open()
+                            osswipeview.currentItem.forceActiveFocus()
+                        }
+                        Material.background: "#ffffff"
+                        Material.foreground: "#c51a4a"
+                        Accessible.ignored: geturlpopup.visible || geturlpopup.visible
+                        Accessible.description: qsTr("Select this button to download a .img from a url and flash it to a card/usb")
+        }
+            }
         }
     }
     
@@ -442,16 +456,13 @@ ApplicationWindow {
                     anchors.fill: parent
                     onClicked: list.currentIndex = index
                 }
-            Keys.onSpacePressed: {
-                if (currentIndex != -1)
-                    selectOSitem(model.get(currentIndex))
-            }
             Accessible.onPressAction: {
-                if (currentIndex != -1)
+                if (currentIndex == 1)
                     selectOSitem(model.get(currentIndex))
                     console.log(model.get(list.currentIndex).name + ' selected')
                     optionspopup.openPopup()
             }
+    
       */
 
     Component {
