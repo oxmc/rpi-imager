@@ -487,7 +487,12 @@ ApplicationWindow {
             icon: "icons/use_custom.png"
             name: qsTr("Use custom .img from URL")
             description: qsTr("Select a custom .img from a URL")
-            geturlpopup.open()
+            
+            MouseArea {
+                    anchors.fill: parent
+                    onClicked: list.currentIndex = index
+                }
+            onCurrentItemChanged: console.log(model.get(list.currentIndex).name + ' selected')
         }
         
         ListElement {
