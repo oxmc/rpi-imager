@@ -19,6 +19,9 @@ Popup {
     padding: 0
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
     property bool initialized: false
+    property bool hasSavedSettings: false
+    property string config
+    property string cmdline
     property string firstrun
 
     // background of title
@@ -68,9 +71,9 @@ Popup {
             Layout.topMargin: 10
             font.family: roboto.name
             font.bold: true
-            text: qsTr("Enter URL of .img")
+            text: qsTr("Advanced options")
         }
-
+        
         FocusScope {
                   id: focusScope
                   focus: true
