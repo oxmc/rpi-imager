@@ -52,26 +52,78 @@ ApplicationWindow {
     }
 
     Popup {
-            id: popup
-            property alias popMessage: message.text
+         id: geturlpopup
+        //x: 62
+        x: (parent.width-width)/2
+        y: 10
+        //width: parent.width-125
+        width: popupbody.implicitWidth+60
+        height: parent.height-20
+        padding: 0
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+        property bool initialized: false
+        property string firstrun
 
-            background: Rectangle {
-                implicitWidth: rootWindow.width
-                implicitHeight: 60
-                color: popupBackGroundColor
-            }
-            y: (rootWindow.height - 60)
-            modal: true
-            focus: true
-            closePolicy: Popup.CloseOnPressOutside
-            Text {
-                id: message
-                anchors.centerIn: parent
-                font.pointSize: 12
-                color: popupTextCOlor
-            }
-            onOpened: popupClose.start()
+        // background of title
+        Rectangle {
+                 color: "#f5f5f5"
+                 anchors.right: parent.right
+                 anchors.top: parent.top
+                 height: 35
+                 width: parent.width
         }
+        // line under title
+        Rectangle {
+                 color: "#afafaf"
+                 width: parent.width
+                 y: 35
+                 implicitHeight: 1
+        }
+
+        Text {
+            id: msgx
+            text: "X"
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.rightMargin: 25
+            anchors.topMargin: 10
+            font.family: roboto.name
+            font.bold: true
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: {
+                    geturlpopup.close()
+                }
+            }
+    }
+
+    ColumnLayout {
+        spacing: 20
+        anchors.fill: parent
+
+        Text {
+            id: popupheader
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            Layout.fillWidth: true
+            Layout.topMargin: 10
+            font.family: roboto.name
+            font.bold: true
+            text: qsTr("Enter URL of .img")
+        }
+
+        FocusScope {
+                  id: focusScope
+                  focus: true
+
+                 TextField {
+                          id: URL
+                          placeholderText: qsTr("URL here")
+                 }
+        }
+    }
         
     ColumnLayout {
         id: bg
@@ -426,16 +478,16 @@ ApplicationWindow {
         ListElement {
             url: ""
             icon: "icons/use_custom.png"
-            name: qsTr("Use custom")
+            name: qsTr("Use custom .img")
             description: qsTr("Select a custom .img from your computer")
         }
         
         ListElement {
             url: ""
             icon: "icons/use_custom.png"
-            name: qsTr("Use custom URL")
+            name: qsTr("Use custom .img from URL")
             description: qsTr("Select a custom .img from a URL")
-            geturlpopup.openPopup()
+            geturlpopup.open()
         }
         
         ListElement {
