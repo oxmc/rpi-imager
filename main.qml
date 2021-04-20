@@ -51,6 +51,28 @@ ApplicationWindow {
         }
     }
 
+    Popup {
+            id: popup
+            property alias popMessage: message.text
+
+            background: Rectangle {
+                implicitWidth: rootWindow.width
+                implicitHeight: 60
+                color: popupBackGroundColor
+            }
+            y: (rootWindow.height - 60)
+            modal: true
+            focus: true
+            closePolicy: Popup.CloseOnPressOutside
+            Text {
+                id: message
+                anchors.centerIn: parent
+                font.pointSize: 12
+                color: popupTextCOlor
+            }
+            onOpened: popupClose.start()
+        }
+        
     ColumnLayout {
         id: bg
         spacing: 0
@@ -404,46 +426,17 @@ ApplicationWindow {
         ListElement {
             url: ""
             icon: "icons/use_custom.png"
-            name: qsTr("Use custom .img")
+            name: qsTr("Use custom")
             description: qsTr("Select a custom .img from your computer")
         }
         
         ListElement {
             url: ""
             icon: "icons/use_custom.png"
-            name: qsTr("Use custom .img from URL")
+            name: qsTr("Use custom URL")
             description: qsTr("Select a custom .img from a URL")
-            onClicked: {
-                            enabled = false
-                            Popup {
-            id: popup
-            property alias popMessage: message.text
-
-            background: Rectangle {
-                implicitWidth: rootWindow.width
-                implicitHeight: 60
-                color: popupBackGroundColor
-            }
-            y: (rootWindow.height - 60)
-            modal: true
-            focus: true
-            closePolicy: Popup.CloseOnPressOutside
-            Text {
-                id: message
-                anchors.centerIn: parent
-                font.pointSize: 12
-                color: popupTextCOlor
-            }
-            onOpened: popupClose.start()
-        }
-
-        // Popup will be closed automatically in 2 seconds after its opened
-        Timer {
-            id: popupClose
-            interval: 2000
-            onTriggered: popup.close()
-        }
-                        }
+            dialog.visible = true
+            geturlpopup.openPopup()
         }
         
         ListElement {
