@@ -50,80 +50,6 @@ ApplicationWindow {
             optionspopup.openPopup()
         }
     }
-
-    Popup {
-         id: geturlpopup
-        //x: 62
-        x: (parent.width-width)/2
-        y: 10
-        //width: parent.width-125
-        width: popupbody.implicitWidth+60
-        height: parent.height-20
-        padding: 0
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
-        property bool initialized: false
-        property string firstrun
-
-        // background of title
-        Rectangle {
-                 color: "#f5f5f5"
-                 anchors.right: parent.right
-                 anchors.top: parent.top
-                 height: 35
-                 width: parent.width
-        }
-        // line under title
-        Rectangle {
-                 color: "#afafaf"
-                 width: parent.width
-                 y: 35
-                 implicitHeight: 1
-        }
-
-        Text {
-            id: msgx
-            text: "X"
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.rightMargin: 25
-            anchors.topMargin: 10
-            font.family: roboto.name
-            font.bold: true
-
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    geturlpopup.close()
-                }
-            }
-    }
-
-    ColumnLayout {
-        spacing: 20
-        anchors.fill: parent
-
-        Text {
-            id: popupheader
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            Layout.fillWidth: true
-            Layout.topMargin: 10
-            font.family: roboto.name
-            font.bold: true
-            text: qsTr("Enter URL of .img")
-        }
-
-        FocusScope {
-                  id: focusScope
-                  focus: true
-
-                 TextField {
-                          id: URL
-                          placeholderText: qsTr("URL here")
-                 }
-        }
-    }
         
     ColumnLayout {
         id: bg
@@ -513,7 +439,16 @@ ApplicationWindow {
                     anchors.fill: parent
                     onClicked: list.currentIndex = index
                 }
-            onCurrentItemChanged: console.log(model.get(list.currentIndex).name + ' selected')
+            Keys.onSpacePressed: {
+                if (currentIndex != -1)
+                    selectOSitem(model.get(currentIndex))
+            }
+            Accessible.onPressAction: {
+                if (currentIndex != -1)
+                    selectOSitem(model.get(currentIndex))
+                    console.log(model.get(list.currentIndex).name + ' selected')
+                    optionspopup.openPopup()
+            }
         }
     }
 
