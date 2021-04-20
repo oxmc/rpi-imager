@@ -404,14 +404,14 @@ ApplicationWindow {
         ListElement {
             url: ""
             icon: "icons/use_custom.png"
-            name: qsTr("Use custom")
+            name: qsTr("Use custom .img")
             description: qsTr("Select a custom .img from your computer")
         }
         
         ListElement {
             url: ""
             icon: "icons/use_custom.png"
-            name: qsTr("Use custom URL")
+            name: qsTr("Use custom .img from URL")
             description: qsTr("Select a custom .img from a URL")
             onClicked: {
                             enabled = false
